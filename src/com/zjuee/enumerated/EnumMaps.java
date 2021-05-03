@@ -4,32 +4,17 @@ import java.util.*;
 
 import static com.zjuee.enumerated.AlarmPoints.*;
 
-interface Command { void action(); }
-
 public class EnumMaps {
     public static void main(String[] args) {
-        EnumMap<AlarmPoints, Command> em = new EnumMap<AlarmPoints, Command>(AlarmPoints.class);
-        em.put(BATHROOM, new Command() {
-            @Override
-            public void action() {
-                System.out.println("Bathroom alert!");
-            }
-        });
-        em.put(KITCHEN, new Command() {
-            @Override
-            public void action() {
-                System.out.println("Kitchen fire!");
-            }
-        });
-        for (Map.Entry<AlarmPoints, Command> e : em.entrySet()){
+        EnumMap<AlarmPoints, Runnable> em = new EnumMap<>(AlarmPoints.class);
+        em.put(BATHROOM, () -> System.out.println("Bathroom alert!"));
+        em.put(KITCHEN, () -> System.out.println("Kitchen fire!"));
+        for (Map.Entry<AlarmPoints, Runnable> e : em.entrySet()){
             System.out.print(e.getKey() + ": ");
-            e.getValue().action();
-        }
-        for (AlarmPoints key : em.keySet()) {
-            System.out.println(key);
+            e.getValue().run();
         }
         try {
-            em.get(UTILITY).action();
+            em.get(UTILITY).run();
         }catch (NullPointerException e) {
             System.out.println(e);
         }

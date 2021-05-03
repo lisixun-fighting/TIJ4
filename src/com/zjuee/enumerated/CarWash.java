@@ -41,9 +41,8 @@ public class CarWash {
         cycles.add(cycle);
     }
     public void washCar() {
-        for (Cycle cycle : cycles) {
+        for (Cycle cycle : cycles)
             cycle.action();
-        }
     }
     public String toString() {
         return cycles.toString();

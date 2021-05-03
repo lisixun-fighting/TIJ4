@@ -6,7 +6,8 @@ public enum Meal2 {
     APPETIZER(Food.Appetizer.class),
     MAINCOURSE(Food.MainCourse.class),
     DESSERT(Food.Dessert.class),
-    COFFEE(Food.Coffee.class);
+    COFFEE(Food.Coffee.class),
+    DRINK(Food.Drink.class);
     private Food[] values;
     private Meal2(Class<? extends Food> type) {
         values = type.getEnumConstants();
@@ -16,13 +17,16 @@ public enum Meal2 {
             SALAD, SOUP, SPRING_ROLLS;
         }
         enum MainCourse implements Food {
-            LASAGNE, BURRITO, PAD_THAI, LENTILS, HUMMOUS, VINDALOO;
+            LASAGNE, BURRITO, PAD_THAI, LENTILS, HUMMOUS, VINDALOO
         }
         enum Dessert implements Food {
-            TIRAMISU, GELATO, BLACK_FOREST_CAKE, FRUIT, CREME_CARAMEL;
+            TIRAMISU, GELATO, BLACK_FOREST_CAKE, FRUIT, CREME_CARAMEL
         }
         enum Coffee implements Food {
-            BLACK_COFFEE, DECAF_COFFEE, ESPRESSO, LATTE, CAPPUCCINO, TEA, HERB_TEA;
+            BLACK_COFFEE, DECAF_COFFEE, ESPRESSO, LATTE, CAPPUCCINO, TEA, HERB_TEA
+        }
+        enum Drink implements Food {
+            Cola, Juice, Milk
         }
     }
     public Food randomSelection() {
