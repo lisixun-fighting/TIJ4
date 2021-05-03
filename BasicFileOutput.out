@@ -1,0 +1,27 @@
+1 package com.zjuee.io;
+2 
+3 import java.io.*;
+4 
+5 public class BasicFileOutput {
+6     static String file = "BasicFileOutput.out";
+7 
+8     public static void main(String[] args) throws IOException {
+9         BufferedReader in = new BufferedReader(
+10                 new StringReader(
+11                         BufferedInputFile.read("src/com.zjuee.io/BasicFileOutput.java")
+12                 )
+13         );
+14         /*PrintWriter out = new PrintWriter(
+15                 new BufferedWriter(new FileWriter(file))
+16         );*/
+17         PrintWriter out = new PrintWriter(file);
+18         int lineCount = 1;
+19         String s;
+20         while((s = in.readLine()) != null) {
+21             out.println(lineCount++ + " " + s);
+22         }
+23         out.close();
+24         in.close();
+25         System.out.println(BufferedInputFile.read(file));
+26     }
+27 }

@@ -1,0 +1,15 @@
+<?com.zjuee.io.xml version="1.0" encoding="ISO-8859-1"?>
+<people>
+    <person>
+        <first>Dr. Bunsen</first>
+        <last>Honeydew</last>
+    </person>
+    <person>
+        <first>Gonzo</first>
+        <last>The Great</last>
+    </person>
+    <person>
+        <first>Philip J.</first>
+        <last>Fry</last>
+    </person>
+</people>

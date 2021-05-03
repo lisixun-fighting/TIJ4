@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="library">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/resources/javassist.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/net.mindview.util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/tools.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/xom-1.3.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
