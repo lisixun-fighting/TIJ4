@@ -9,7 +9,7 @@ public enum Meal2 {
     COFFEE(Food.Coffee.class),
     DRINK(Food.Drink.class);
     private Food[] values;
-    private Meal2(Class<? extends Food> type) {
+    Meal2(Class<? extends Food> type) {
         values = type.getEnumConstants();
     }
     public interface Food {

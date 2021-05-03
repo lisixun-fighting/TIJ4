@@ -36,17 +36,13 @@ class Mail {
         return mail;
     }
     public static Iterable<Mail> generator(final int count) {
-        return new Iterable<Mail>() {
+        return new Iterable<>() {
             int n = count;
-            @Override
             public Iterator<Mail> iterator() {
-                return new Iterator<Mail>() {
-                    @Override
+                return new Iterator<>() {
                     public boolean hasNext() {
                         return n-- > 0;
                     }
-
-                    @Override
                     public Mail next() {
                         return randomMail();
                     }
@@ -70,7 +66,6 @@ public class PostOffice {
             }
         },
         MACHINE_SCAN {
-            @Override
             boolean handle(Mail m) {
                 switch (m.scannability) {
                     case UNSACCANNABLE:
@@ -86,7 +81,6 @@ public class PostOffice {
             }
         },
         VISUAL_INSPECTION {
-            @Override
             boolean handle(Mail m) {
                 switch (m.readability) {
                     case ILLEGIBLE: return false;
@@ -101,7 +95,6 @@ public class PostOffice {
             }
         },
         RETURN_TO_SENDER {
-            @Override
             boolean handle(Mail m) {
                 switch (m.returnAddress) {
                     case MISSING: return false;
@@ -114,9 +107,8 @@ public class PostOffice {
         abstract boolean handle(Mail m);
     }
     static void handle(Mail m) {
-        for (MailHandler mailHandler : MailHandler.values()) {
+        for (MailHandler mailHandler : MailHandler.values())
             if(mailHandler.handle(m)) return;
-        }
         System.out.println(m + " is a dead letter");
     }
 
