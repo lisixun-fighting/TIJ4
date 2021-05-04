@@ -21,8 +21,7 @@ public enum VowelsAndConsonants {
     }
 
     public static void main(String[] args) {
-        for (VowelsAndConsonants vac : VowelsAndConsonants.values()) {
+        for (VowelsAndConsonants vac : VowelsAndConsonants.values())
             System.out.println(Arrays.toString(vac.values));
-        }
     }
 }

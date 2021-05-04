@@ -3,11 +3,13 @@ package com.zjuee.enumerated;
 import java.util.*;
 
 class Mail {
+    enum Redirect {YES, NO1, NO2, NO3, NO4, NO5}
     enum GeneralDelivery {YES, NO1, NO2, NO3, NO4, NO5}
     enum Scannability {UNSACCANNABLE, YES1, YES2, YES3, YES4, YES5}
     enum Readability {ILLEGIBLE, YES1, YES2, YES3, YES4, YES5}
     enum Address {INCORRECT, OK1, OK2, OK3, OK4, OK5}
     enum ReturnAddress {MISSING, OK1, OK2, OK3, OK4, OK5}
+    Redirect redirect;
     GeneralDelivery generalDelivery;
     Scannability scannability;
     Readability readability;
@@ -19,7 +21,8 @@ class Mail {
         return "Mail " + id;
     }
     public String details() {
-        return toString() +
+        return this +
+                ", Redirect " + redirect +
                 ", General Delivery " + generalDelivery +
                 ", Scan Ability " + scannability +
                 ", Read Ability " + readability +
@@ -28,6 +31,7 @@ class Mail {
     }
     public static Mail randomMail() {
         Mail mail = new Mail();
+        mail.redirect = Enums.random(Redirect.class);
         mail.generalDelivery = Enums.random(GeneralDelivery.class);
         mail.readability = Enums.random(Readability.class);
         mail.address = Enums.random(Address.class);
@@ -54,6 +58,17 @@ class Mail {
 
 public class PostOffice {
     enum MailHandler {
+        REDIRECT_MAIL {
+            boolean handle(Mail m) {
+                switch (m.redirect) {
+                    case YES:
+                        System.out.println("Redirect the delivery " + m);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        },
         GENERAL_DELIVERY {
             boolean handle(Mail m) {
                 switch (m.generalDelivery) {

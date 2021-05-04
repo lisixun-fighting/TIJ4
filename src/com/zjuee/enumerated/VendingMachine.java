@@ -3,7 +3,6 @@ package com.zjuee.enumerated;
 import com.zjuee.util.Generator;
 import com.zjuee.util.TextFile;
 import java.util.*;
-
 import static com.zjuee.enumerated.Input.*;
 
 enum Category {
@@ -12,16 +11,14 @@ enum Category {
     QUIT_TRANSACTION(ABORT_TRANSACTION),
     SHUT_DOWN(STOP);
     private Input[] values;
-    private Category(Input...types) {
+    Category(Input...types) {
         values = types;
     }
-    private static EnumMap<Input, Category> categories = new EnumMap<Input, Category>(Input.class);
+    private static EnumMap<Input, Category> categories = new EnumMap<>(Input.class);
     static {
-        for (Category c : Category.class.getEnumConstants()) {
-            for (Input type : c.values) {
+        for (Category c : Category.class.getEnumConstants())
+            for (Input type : c.values)
                 categories.put(type, c);
-            }
-        }
     }
     public static Category categorize(Input input) {
         return categories.get(input);
@@ -113,12 +110,13 @@ public class VendingMachine {
 
     public static void main(String[] args) {
         Generator<Input> gen = new RandomInputGenerator();
+        if(args.length == 1)
+            gen = new FileInputGenerator(args[0]);
         run(gen);
     }
 }
 
 class RandomInputGenerator implements Generator<Input> {
-    @Override
     public Input next() {
         return Input.randomSelection();
     }
@@ -129,7 +127,6 @@ class FileInputGenerator implements Generator<Input> {
     public FileInputGenerator(String filename) {
         input = new TextFile(filename, ";").iterator();
     }
-    @Override
     public Input next() {
         if(!input.hasNext())
             return null;
