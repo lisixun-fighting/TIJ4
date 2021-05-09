@@ -3,6 +3,7 @@ package com.zjuee.practice.ch14;
 import com.zjuee.typeinfo.factory.Factory;
 import com.zjuee.util.TypeCounter;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,10 +19,10 @@ class Part {
         partFactories.add(FanBelt.class);
         partFactories.add(GeneratorBelt.class);
     }
-    private static Random rand = new Random(47);
-    public static Part createRandom() throws IllegalAccessException, InstantiationException {
+    private static final Random rand = new Random(47);
+    public static Part createRandom() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         int n = rand.nextInt(partFactories.size());
-        return partFactories.get(n).newInstance();
+        return partFactories.get(n).getDeclaredConstructor().newInstance();
     }
 }
 
@@ -45,7 +46,7 @@ class GeneratorBelt extends Belt {
 }
 
 public class Demo01 {
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         TypeCounter counter = new TypeCounter(Part.class);
         for (int i = 0; i < 10; i++) {
             Part p = Part.createRandom();
