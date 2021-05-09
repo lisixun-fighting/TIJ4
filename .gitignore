@@ -23,6 +23,7 @@ local.properties
 *.swp
 datanucleus.log
 /bin/
+/out
 *.log
 event-sourcing/Journal.json
 

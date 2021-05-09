@@ -7,12 +7,10 @@ class House implements Serializable {}
 class Animal implements Serializable {
     private String name;
     private House preferredHouse;
-
     public Animal(String name, House preferredHouse) {
         this.name = name;
         this.preferredHouse = preferredHouse;
     }
-
     public String toString() {
         return name + "[" + super.toString() + "], " + preferredHouse + "\n";
     }
@@ -37,11 +35,11 @@ public class MyWorld {
 
         // Now get them back
         ObjectInputStream in1 = new ObjectInputStream(new ByteArrayInputStream(buf1.toByteArray()));
-        ObjectInputStream in2 = new ObjectInputStream(new ByteArrayInputStream(buf1.toByteArray()));
-        List
-                animals1 = (List) in1.readObject(),
-                animals2 = (List) in1.readObject(),
-                animals3 = (List) in2.readObject();
+        ObjectInputStream in2 = new ObjectInputStream(new ByteArrayInputStream(buf2.toByteArray()));
+        List<?>
+                animals1 = (List<?>) in1.readObject(),
+                animals2 = (List<?>) in1.readObject(),
+                animals3 = (List<?>) in2.readObject();
         System.out.println(animals1);
         System.out.println(animals2);
         System.out.println(animals3);

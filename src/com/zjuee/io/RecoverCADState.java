@@ -10,7 +10,7 @@ public class RecoverCADState {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream("CADState.out"));
 
-//        List<Class<? extends Shape>> shapeTypes = (List<Class<? extends Shape>>) in.readObject();
+        List<Class<? extends Shape>> shapeTypes = (List<Class<? extends Shape>>) in.readObject();
 
         Shape.deserializeStaticState(in);
         List<Shape> shapes = (List<Shape>) in.readObject();

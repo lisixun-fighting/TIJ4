@@ -14,8 +14,8 @@ class Data implements Serializable {
 }
 
 public class Worm implements Serializable {
-    private static Random rand = new Random(47);
-    private Data[] d = {
+    private static final Random rand = new Random(47);
+    private final Data[] d = {
             new Data(rand.nextInt(10)),
             new Data(rand.nextInt(10)),
             new Data(rand.nextInt(10))
@@ -35,13 +35,11 @@ public class Worm implements Serializable {
         StringBuilder result = new StringBuilder(":");
         result.append(c);
         result.append("(");
-        for (Data dat : d) {
+        for (Data dat : d)
             result.append(dat);
-        }
         result.append(")");
-        if(next!=null) {
+        if(next != null)
             result.append(next);
-        }
         return result.toString();
     }
 

@@ -5,29 +5,23 @@ import java.io.*;
 public class Blip3 implements Externalizable {
     private int i;
     private String s;
-
     public Blip3() {
         System.out.println("Blip3 Constructor");
     }
-
     public Blip3(int i, String s) {
         System.out.println("Blip3(int i, String s)");
         this.i = i;
         this.s = s;
     }
-
     public String toString() {
         return s + i;
     }
-
-    @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         System.out.println("Blip3.writeExternal");
+        // You must do this
         out.writeObject(s);
         out.writeInt(i);
     }
-
-    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         System.out.println("Blip3.readExternal");
         s = (String) in.readObject();

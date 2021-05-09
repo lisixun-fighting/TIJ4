@@ -41,7 +41,6 @@ abstract class Shape implements Serializable {
 }
 
 class Circle extends Shape {
-
     public Circle(int xVal, int yVal, int dim) {
         super(xVal, yVal, dim);
         System.out.println("Circle Constructing");
@@ -86,22 +85,21 @@ class Line extends Shape {
 
 public class StoreCADState {
     public static void main(String[] args) throws IOException {
-        /*List<Class<? extends Shape>> shapeTypes = new ArrayList<>();
+        List<Class<? extends Shape>> shapeTypes = new ArrayList<>();
 
         shapeTypes.add(Circle.class);
         shapeTypes.add(Square.class);
-        shapeTypes.add(Line.class);*/
+        shapeTypes.add(Line.class);
         List<Shape> shapes = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++)
             shapes.add(Shape.randomFactory());
-        }
-        for (int i = 0; i < 10; i++) {
-            ((Shape)shapes.get(i)).setColor(Shape.GREEN);
-        }
+
+        for (int i = 0; i < 10; i++)
+            shapes.get(i).setColor(Shape.GREEN);
 
         ObjectOutputStream out = new ObjectOutputStream(
                 new FileOutputStream("CADState.out"));
-//        out.writeObject(shapeTypes);
+        out.writeObject(shapeTypes);
         Shape.serializeStaticState(out);
         out.writeObject(shapes);
 
