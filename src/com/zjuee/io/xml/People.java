@@ -1,19 +1,29 @@
 package com.zjuee.io.xml;
 
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.Elements;
+import org.w3c.dom.*;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.ArrayList;
 
 public class People extends ArrayList<Person> {
     public People(String filename) throws Exception {
-        Document doc = new Builder().build(filename);
-        Elements elements = doc.getRootElement().getChildElements();
-
-        for (int i = 0; i < elements.size(); i++)
-            add(new Person(elements.get(i)));
-
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(filename);
+        Element root = doc.getDocumentElement();
+        System.out.println(root.getTagName());
+        NodeList children = root.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            Node child = children.item(i);
+            if(child instanceof Element) {
+                Node firstNode = ((Element) child).getElementsByTagName("first").item(0);
+                String first = firstNode.getTextContent();
+                Node lastNode = ((Element) child).getElementsByTagName("last").item(0);
+                String last = lastNode.getTextContent();
+                add(new Person(first, last));
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception{
