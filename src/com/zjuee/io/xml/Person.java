@@ -6,10 +6,11 @@ import java.io.*;
 import java.util.*;
 
 public class Person {
-    private String first, last;
-    public Person(String first, String last) {
+    private String first, last, address;
+    public Person(String first, String last, String address) {
         this.first = first;
         this.last = last;
+        this.address = address;
     }
     public Element getXML() {
         Element person = new Element("person");
@@ -17,16 +18,20 @@ public class Person {
         firstName.appendChild(first);
         Element lastName = new Element("last");
         lastName.appendChild(last);
+        Element addressName = new Element("address");
+        addressName.appendChild(address);
         person.appendChild(firstName);
         person.appendChild(lastName);
+        person.appendChild(addressName);
         return person;
     }
     public Person(Element person) {
         first = person.getFirstChildElement("first").getValue();
         last = person.getFirstChildElement("last").getValue();
+        address = person.getFirstChildElement("address").getValue();
     }
     public String toString() {
-        return first + " " + last;
+        return first + " " + last + " " + address;
     }
 
     public static void format(OutputStream out, Document doc) throws Exception {
@@ -38,9 +43,9 @@ public class Person {
     }
     public static void main(String[] args) throws Exception {
         List<Person> people = Arrays.asList(
-                new Person("Dr. Bunsen", "Honeydew"),
-                new Person("Gonzo", "The Great"),
-                new Person("Philip J.", "Fry"));
+                new Person("Dr. Bunsen", "Honeydew", "Xi'an"),
+                new Person("Gonzo", "The Great", "Shanghai"),
+                new Person("Philip J.", "Fry", "Hangzhou"));
         System.out.println(people);
         Element root = new Element("people");
         for(Person p : people)

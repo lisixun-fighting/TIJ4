@@ -21,7 +21,9 @@ public class People extends ArrayList<Person> {
                 String first = firstNode.getTextContent();
                 Node lastNode = ((Element) child).getElementsByTagName("last").item(0);
                 String last = lastNode.getTextContent();
-                add(new Person(first, last));
+                Node addressNode = ((Element) child).getElementsByTagName("address").item(0);
+                String address = addressNode.getTextContent();
+                add(new Person(first, last, address));
             }
         }
     }

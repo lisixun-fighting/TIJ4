@@ -3,13 +3,16 @@
     <person>
         <first>Dr. Bunsen</first>
         <last>Honeydew</last>
+        <address>Xi'an</address>
     </person>
     <person>
         <first>Gonzo</first>
         <last>The Great</last>
+        <address>Shanghai</address>
     </person>
     <person>
         <first>Philip J.</first>
         <last>Fry</last>
+        <address>Hangzhou</address>
     </person>
 </people>
