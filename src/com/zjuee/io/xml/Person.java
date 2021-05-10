@@ -7,12 +7,10 @@ import java.util.*;
 
 public class Person {
     private String first, last;
-
     public Person(String first, String last) {
         this.first = first;
         this.last = last;
     }
-
     public Element getXML() {
         Element person = new Element("person");
         Element firstName = new Element("first");
@@ -23,12 +21,10 @@ public class Person {
         person.appendChild(lastName);
         return person;
     }
-
     public Person(Element person) {
         first = person.getFirstChildElement("first").getValue();
         last = person.getFirstChildElement("last").getValue();
     }
-
     public String toString() {
         return first + " " + last;
     }
@@ -40,21 +36,19 @@ public class Person {
         serializer.write(doc);
         serializer.flush();
     }
-
     public static void main(String[] args) throws Exception {
         List<Person> people = Arrays.asList(
                 new Person("Dr. Bunsen", "Honeydew"),
                 new Person("Gonzo", "The Great"),
                 new Person("Philip J.", "Fry"));
         System.out.println(people);
-
         Element root = new Element("people");
-        for(Person p : people) {
+        for(Person p : people)
             root.appendChild(p.getXML());
-        }
 
         Document doc = new Document(root);
+
         format(System.out, doc);
-        format(new BufferedOutputStream(new FileOutputStream("People.com.zjuee.chapter18_io.xml")), doc);
+        format(new BufferedOutputStream(new FileOutputStream("src/com/zjuee/io/xml/People.xml")), doc);
     }
 }
