@@ -1,10 +1,13 @@
 package com.zjuee.concurrency;
 
+import java.util.concurrent.TimeUnit;
+
 public class SimpleThread extends Thread{
     private int countDown = 5;
     private static int threadCount = 0;
     public SimpleThread() {
         super(Integer.toString(++threadCount));
+        this.setDaemon(true);
         start();
     }
     public String toString() {
@@ -18,9 +21,9 @@ public class SimpleThread extends Thread{
         }
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
+    public static void main(String[] args) throws InterruptedException {
+        for (int i = 0; i < 5; i++)
             new SimpleThread();
-        }
+        TimeUnit.SECONDS.sleep(1);
     }
 }

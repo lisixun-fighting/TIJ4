@@ -12,15 +12,14 @@ public class SleepingTask extends LiftOff {
                 TimeUnit.MILLISECONDS.sleep(100);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("Interrupted");
         }
     }
 
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
             exec.execute(new SleepingTask());
-        }
         exec.shutdown();
     }
 }

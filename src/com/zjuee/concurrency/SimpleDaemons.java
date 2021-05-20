@@ -2,8 +2,7 @@ package com.zjuee.concurrency;
 
 import java.util.concurrent.TimeUnit;
 
-public class SimpleDaemons implements Runnable{
-    @Override
+public class SimpleDaemons implements Runnable {
     public void run() {
         try {
             while (true) {
@@ -11,7 +10,7 @@ public class SimpleDaemons implements Runnable{
                 System.out.println(Thread.currentThread() + " " + this);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("sleep() interrupted");
         }
     }
 
