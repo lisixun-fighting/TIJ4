@@ -24,8 +24,8 @@ class Accessor implements Runnable {
 }
 
 public class ThreadLocalVariableHolder {
-    private static ThreadLocal<Integer> value = new ThreadLocal<>() {
-        private Random rand = new Random(47);
+    private static final ThreadLocal<Integer> value = new ThreadLocal<>() {
+        private final Random rand = new Random(47);
         protected synchronized Integer initialValue() {
             return rand.nextInt(100);
         }
@@ -36,12 +36,10 @@ public class ThreadLocalVariableHolder {
     public static int get() {
         return value.get();
     }
-
     public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
             exec.execute(new Accessor(i));
-        }
         TimeUnit.SECONDS.sleep(3);
         exec.shutdownNow();
     }
