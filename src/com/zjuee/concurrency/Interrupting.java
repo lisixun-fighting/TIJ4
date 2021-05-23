@@ -19,7 +19,7 @@ class SleepBlocked implements Runnable {
 }
 
 class IOBlocked implements Runnable {
-    private InputStream in;
+    private final InputStream in;
     public IOBlocked(InputStream in) {
         this.in = in;
     }
