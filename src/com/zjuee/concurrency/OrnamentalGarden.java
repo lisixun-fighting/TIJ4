@@ -35,16 +35,18 @@ class Entrance implements Runnable {
         entrances.add(this);
     }
     public void run() {
-        while (!canceled) {
-            synchronized (this) {
-                ++number;
-            }
-            System.out.println(this + " Total: " + count.increment());
-            try {
+//        while (!canceled) {
+        try {
+            while (!Thread.interrupted()) {
+                synchronized (this) {
+                    ++number;
+                }
+                System.out.println(this + " Total: " + count.increment());
                 TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                System.out.println("sleep interrupted");
             }
+        }
+        catch (InterruptedException e) {
+            System.out.println("sleep interrupted");
         }
         System.out.println("Stopping: " + this);
     }
@@ -59,9 +61,8 @@ class Entrance implements Runnable {
     }
     public static int sumEntrances() {
         int sum = 0;
-        for (Entrance entrance : entrances) {
+        for (Entrance entrance : entrances)
             sum += entrance.getValue();
-        }
         return sum;
     }
 }
@@ -69,15 +70,16 @@ class Entrance implements Runnable {
 public class OrnamentalGarden {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
             exec.execute(new Entrance(i));
-        }
         TimeUnit.SECONDS.sleep(3);
-        Entrance.cancel();
-        exec.shutdown();
+        exec.shutdownNow();
+//        Entrance.cancel();
+//        exec.shutdown();
         if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
             System.out.println("Some tasks were not terminated!");
         System.out.println("Total: " + Entrance.getTotalCount());
         System.out.println("Sum of Entrances: " + Entrance.sumEntrances());
+        System.exit(0);
     }
 }
