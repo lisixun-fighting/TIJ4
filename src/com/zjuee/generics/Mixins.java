@@ -19,7 +19,6 @@ interface SerialNumbered { long getSerialNumber(); }
 class SerialNumberedImp implements SerialNumbered {
     private static long counter = 1;
     private final long serialNumber = counter++;
-    @Override
     public long getSerialNumber() {
         return serialNumber;
     }
@@ -28,7 +27,6 @@ class SerialNumberedImp implements SerialNumbered {
 interface IColored { String color(); }
 
 class ColoredImp implements IColored {
-    @Override
     public String color() {
         return "yellow";
     }
@@ -41,11 +39,9 @@ interface Basic {
 
 class BasicImp implements Basic {
     private String value;
-    @Override
     public void set(String val) {
         value = val;
     }
-    @Override
     public String get() {
         return value;
     }
@@ -58,7 +54,6 @@ public class Mixins extends BasicImp implements TimeStamped, SerialNumbered {
     private final TimeStamped timeStamp = new TimeStampedImp();
     private final SerialNumbered serialNumbered = new SerialNumberedImp();
     public Mixins() {}
-    @Override
     public long getSerialNumber() {
         return serialNumbered.getSerialNumber();
     }
