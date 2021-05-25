@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 class Toast {
     public enum Status {
-        DRY, BUTTERED, JAMMED
+        DRY, BUTTERED, JELLIED, JAMMED
     }
     private Status status = Status.DRY;
     private final int id;
@@ -17,6 +17,9 @@ class Toast {
     }
     public void butter() {
         status = Status.BUTTERED;
+    }
+    public void jelly() {
+        status = Status.JELLIED;
     }
     public void jam() {
         status = Status.JAMMED;
@@ -35,9 +38,9 @@ class Toast {
 class ToastQueue extends LinkedBlockingQueue<Toast> {}
 
 class Toaster implements Runnable {
-    private ToastQueue toastQueue;
+    private final ToastQueue toastQueue;
     private int count = 0;
-    private Random rand = new Random(47);
+    private final Random rand = new Random(47);
     public Toaster(ToastQueue toastQueue) {
         this.toastQueue = toastQueue;
     }
@@ -57,7 +60,7 @@ class Toaster implements Runnable {
 }
 
 class Butterer implements Runnable {
-    private ToastQueue dryQueue, butteredQueue;
+    private final ToastQueue dryQueue, butteredQueue;
     public Butterer(ToastQueue dryQueue, ToastQueue butteredQueue) {
         this.dryQueue = dryQueue;
         this.butteredQueue = butteredQueue;
@@ -75,6 +78,27 @@ class Butterer implements Runnable {
         }
         System.out.println("Butterer Off");
 
+    }
+}
+
+class Jellyer implements Runnable {
+    private ToastQueue dryQueue, jelliedQueue;
+    public Jellyer(ToastQueue dryQueue, ToastQueue jelliedQueue) {
+        this.dryQueue = dryQueue;
+        this.jelliedQueue = jelliedQueue;
+    }
+    public void run() {
+        try {
+            while (!Thread.interrupted()) {
+                Toast t = dryQueue.take();
+                t.jelly();
+                System.out.println(t);
+                jelliedQueue.put(t);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Jellyer interrupted");
+        }
+        System.out.println("Jellyer Off");
     }
 }
 
@@ -100,7 +124,7 @@ class Jammer implements Runnable {
 }
 
 class Eater implements Runnable {
-    private ToastQueue finishedQueue;
+    private final ToastQueue finishedQueue;
     private int counter = 0;
     public Eater(ToastQueue finishedQueue) {
         this.finishedQueue = finishedQueue;
@@ -130,6 +154,7 @@ public class ToastOMatic {
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.execute(new Toaster(dryQueue));
         exec.execute(new Butterer(dryQueue, butteredQueue));
+        exec.execute(new Jellyer(dryQueue, butteredQueue));
         exec.execute(new Jammer(butteredQueue, finishedQueue));
         exec.execute(new Eater(finishedQueue));
         TimeUnit.SECONDS.sleep(5);
