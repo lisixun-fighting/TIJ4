@@ -67,9 +67,8 @@ public class GreenHouseScheduler {
             System.out.println("Terminating");
             scheduler.shutdownNow();
             new Thread(() -> {
-                for (DataPoint d : data) {
+                for (DataPoint d : data)
                     System.out.println(d);
-                }
             }).start();
         }
     }
@@ -102,10 +101,12 @@ public class GreenHouseScheduler {
             System.out.println("Collecting data");
             synchronized (GreenHouseScheduler.this) {
                 lastTime.set(Calendar.MINUTE, lastTime.get(Calendar.MINUTE) + 30);
-                if (rand.nextInt(5) == 4)
+                if (rand.nextInt(5) == 4) {
                     tempDirection = -tempDirection;
+                    humidityDirection = -humidityDirection;
+                }
                 lastTemp = lastTemp + tempDirection * (1.0f + rand.nextFloat());
-                lastHumidity = lastHumidity + humidityDirection * rand.nextInt();
+                lastHumidity = lastHumidity + humidityDirection * rand.nextFloat();
                 data.add(new DataPoint((Calendar) lastTime.clone(), lastTemp, lastHumidity));
             }
         }
