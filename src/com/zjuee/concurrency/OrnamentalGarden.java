@@ -26,16 +26,11 @@ class Entrance implements Runnable {
     private static final List<Entrance> entrances = new ArrayList<>();
     private int number = 0;
     private final int id;
-    private static volatile boolean canceled = false;
-    public static void cancel() {
-        canceled = true;
-    }
     public Entrance(int id) {
         this.id = id;
         entrances.add(this);
     }
     public void run() {
-//        while (!canceled) {
         try {
             while (!Thread.interrupted()) {
                 synchronized (this) {
@@ -46,7 +41,7 @@ class Entrance implements Runnable {
             }
         }
         catch (InterruptedException e) {
-            System.out.println("sleep interrupted");
+            System.out.println("Sleep interrupted");
         }
         System.out.println("Stopping: " + this);
     }
@@ -74,8 +69,6 @@ public class OrnamentalGarden {
             exec.execute(new Entrance(i));
         TimeUnit.SECONDS.sleep(3);
         exec.shutdownNow();
-//        Entrance.cancel();
-//        exec.shutdown();
         if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
             System.out.println("Some tasks were not terminated!");
         System.out.println("Total: " + Entrance.getTotalCount());
