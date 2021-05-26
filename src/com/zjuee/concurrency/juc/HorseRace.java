@@ -48,7 +48,7 @@ public class HorseRace {
     private final List<Horse> horses = new ArrayList<>();
     private final ExecutorService exec = Executors.newCachedThreadPool();
     private CyclicBarrier barrier;
-    public HorseRace(int nHorses, final int pause) {
+    public HorseRace(int nHorses, int pause) {
         barrier = new CyclicBarrier(nHorses, () -> {
             StringBuilder s = new StringBuilder();
             for (int i = 0; i < FINISH_LINE; i++)

@@ -90,9 +90,8 @@ class PrioritizedTaskConsumer implements Runnable {
     }
     public void run() {
         try {
-            while (!Thread.interrupted()) {
+            while (!Thread.interrupted())
                 q.take().run();
-            }
         } catch (InterruptedException ignore) {
         }
         System.out.println("Finished PrioritizedTaskConsumer");

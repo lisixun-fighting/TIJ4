@@ -111,7 +111,6 @@ public class GreenHouseScheduler {
             }
         }
     }
-
     public static void main(String[] args) {
         GreenHouseScheduler gh = new GreenHouseScheduler();
         gh.schedule(gh.new Terminate(), 5000);

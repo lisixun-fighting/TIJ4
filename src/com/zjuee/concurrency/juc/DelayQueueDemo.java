@@ -59,7 +59,8 @@ class DelayedTaskConsumer implements Runnable {
         try {
             while (!Thread.interrupted())
                 q.take().run();
-        } catch (InterruptedException ignore) {
+        } catch (InterruptedException e) {
+            System.out.println("DelayedTaskConsumer interrupted");
         }
         System.out.println("Finished DelayedTaskConsumer");
     }
