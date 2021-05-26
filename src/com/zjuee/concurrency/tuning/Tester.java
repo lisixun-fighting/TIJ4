@@ -1,4 +1,4 @@
-package com.zjuee.concurrency;
+package com.zjuee.concurrency.tuning;
 
 import com.zjuee.arrays.RandomGenerator;
 import com.zjuee.util.Generated;
