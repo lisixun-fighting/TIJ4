@@ -1,11 +1,7 @@
 package com.zjuee.concurrency.restaurant2;
 
-import com.zjuee.enumerated.menu.Course;
-import com.zjuee.enumerated.menu.Food;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.zjuee.enumerated.menu.*;
+import java.util.*;
 import java.util.concurrent.*;
 
 class Order {
@@ -105,6 +101,7 @@ class WaitPerson implements Runnable {
                 Plate plate = fillOrders.take();
                 System.out.println(this + "received " + plate + " delivering to " +
                         plate.getOrder().getCustomer());
+                plate.getOrder().getCustomer().deliver(plate);
             }
         } catch (InterruptedException e) {
             System.out.println(this + " interrupted");
