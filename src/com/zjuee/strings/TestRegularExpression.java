@@ -14,9 +14,8 @@ public class TestRegularExpression {
             System.out.println("Regular expression: \"" + arg + "\"");
             Pattern p = Pattern.compile(arg);
             Matcher m = p.matcher(args[0]);
-            while(m.find()) {
+            while(m.find())
                 System.out.println("Match \"" + m.group() + "\" as positions " + m.start() + "-" + (m.end() - 1));
-            }
         }
 
     }
