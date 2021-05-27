@@ -1,12 +1,13 @@
 <component name="libraryTable">
   <library name="resources">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/resources" />
+      <root url="jar://$PROJECT_DIR$/resources/xom-1.3.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/javassist.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/apt-mirror-api-0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/net.mindview.util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/resources/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/xom-1.3.7-sources.jar!/" />
-    </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/resources" recursive="false" />
+    <SOURCES />
   </library>
 </component>

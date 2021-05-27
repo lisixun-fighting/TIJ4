@@ -3,8 +3,7 @@ package com.zjuee.typeinfo;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
-
-import static net.mindview.util.Print.print;
+import static com.zjuee.util.Print.*;
 
 public class ShowMethods {
     private static String usage =
