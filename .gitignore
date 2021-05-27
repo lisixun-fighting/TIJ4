@@ -31,12 +31,13 @@ event-sourcing/Journal.json
 .checkstyle
 
 ##################### STS #######################
+/resources/
 .apt_generated
 .springBeans
 .sts4-cache
 
 ################# IntelliJ IDEA #################
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
